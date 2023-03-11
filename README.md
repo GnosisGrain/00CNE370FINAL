@@ -27,7 +27,7 @@ bash
 ```
 3. Build and run the Docker Compose app:
 ```
-· docker-compose up
+ docker-compose up
 ```
 4. Once the app is running, you can access the merged database by running the following command:
 
