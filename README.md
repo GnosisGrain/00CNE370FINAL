@@ -20,21 +20,22 @@ To get started with this app, follow these steps:
 · git clone https://github.com/yourusername/sharded-database.git
 
 · Navigate to the cloned repository:
-
+```
 bash
 
 · cd sharded-database
-
+```
 · Build and run the Docker Compose app:
-
+```
 · docker-compose up
-
+```
 · Once the app is running, you can access the merged database by running the following command:
 
-python
+```
+python docker exec -it sharded-database_python_1 python merge.py
+```
 
-1.  docker exec -it sharded-database_python_1 python merge.py
-2.  This will execute the merge.py Python script, which connects to both database shards, queries the data, and merges the results.
+This will execute the merge.py Python script, which connects to both database shards, queries the data, and merges the results.
 
 **Configuration**
 
