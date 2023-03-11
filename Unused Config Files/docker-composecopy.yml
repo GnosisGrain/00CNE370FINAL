@@ -1,3 +1,4 @@
+# docker-compose.yml
 version: '2'
     maxscale:
         image: mariadb/maxscale:latest
