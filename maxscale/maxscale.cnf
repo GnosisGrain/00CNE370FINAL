@@ -10,9 +10,35 @@
 # Global parameters
 
 [maxscale]
-threads=auto
-# this enables external access to the REST API outside of localhost
-# please review / modify for any public / non development environments
-admin_host=0.0.0.0
+threads=8
 
+[zipcodes_one]
+type=server
+address=192.168.56.102
+port=3306
 
+[zipcodes_two]
+type=server
+address=192.168.122.85
+port=3306
+
+[Sharded-Service]
+type=service
+router=schemarouter
+servers=zipcodes_one,zipcodes_two
+user=rootwork
+password=YqztlYGDvZ8tVMe3GUm9XCwQi
+
+[Sharded-Service-Listener]
+type=listener
+service=Sharded-Service
+protocol=MariaDBClient
+port=4000
+
+[MySQL-Monitor]
+type=monitor
+module=mariadbmon
+servers=zipcodes_one,zipcodes)two
+user=monitoruser
+password=7SP1Zcsow8TG+9EkEBVEbaKa
+monitor_interval=1000
