@@ -1,7 +1,7 @@
 import pymysql
 
 # Connect to database
-conn = pymysql.connect(host='localhost', user='maxuser', passwd='1cadwaer2', db='zipcodes')
+conn = pymysql.connect(host='192.168.50.228 ', user='maxuser', passwd='1cadwaer2', db='zipcodes')
 
 # Create cursor object
 cursor = conn.cursor()
