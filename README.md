@@ -14,22 +14,22 @@ Before you begin, ensure that you have the following installed on your system:
 To get started with this app, follow these steps:
 
 1.  Clone this repository to your local machine:
-
+```
     bash
 
-· git clone https://github.com/yourusername/sharded-database.git
-
-· Navigate to the cloned repository:
+ git clone https://github.com/yourusername/sharded-database.git
+```
+2. Navigate to the cloned repository:
 ```
 bash
 
-· cd sharded-database
+ cd sharded-database
 ```
-· Build and run the Docker Compose app:
+3. Build and run the Docker Compose app:
 ```
 · docker-compose up
 ```
-· Once the app is running, you can access the merged database by running the following command:
+4. Once the app is running, you can access the merged database by running the following command:
 
 ```
 python docker exec -it sharded-database_python_1 python merge.py
@@ -42,7 +42,7 @@ This will execute the merge.py Python script, which connects to both database sh
 This Docker Compose app is pre-configured with two database shards, each running MySQL. The docker-compose.yml file defines the services for the app, including the database shards and the Python container.
 
 By default, the app uses the following configuration:
-
+```
 -   MySQL shard 1:
     -   Host: localhost
     -   Port: 3306
@@ -55,7 +55,7 @@ By default, the app uses the following configuration:
     -   User: root
     -   Password: password
     -   Database: shard2
-
+```
 You can modify these settings by editing the docker-compose.yml file or by passing environment variables to the containers.
 
 **Customizing the Python Script**
