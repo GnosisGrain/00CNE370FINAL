@@ -1,4 +1,4 @@
-**Sharded Database with Docker Compose and Python**
+**Maxscale Instance Database Sharding with Python and Docker Compose**
 
 This Docker Compose app demonstrates how to set up a sharded database with two database shards using MySQL and a Python script to connect, query, and demonstrate the merged database.
 
