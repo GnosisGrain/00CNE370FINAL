@@ -1,42 +1,56 @@
-import pymysql
+### Code written by Doc McDowell for CNE370 Winter Quarter, 2023, mcdowelldoc@gmail.com with assistance from the following resources:
+# https://mariadb.com/resources/blog/schema-sharding-with-mariadb-maxscale-2-1-part-1/
+#https://k21academy.com/docker-kubernetes/docker-compose/
+#https://devhints.io/docker-compose
 
-# Connect to database
-conn = pymysql.connect(host='192.168.50.228 ', user='maxuser', passwd='1cadwaer2', db='zipcodes')
+import mysql.connector
 
-# Create cursor object
-cursor = conn.cursor()
+# Connect to Maxscale instance
+db = mysql.connector.connect(
+    host="127.0.0.1",
+    user="rootwork",
+    password="1cadwaer2",
+    database="zipcodes"
+)
 
-# Print last 10 rows of zipcodes_one
-print('The last 10 rows of zipcodes_one are:')
-sql = "SELECT * FROM zipcodes_one LIMIT 9990, 10"
-cursor.execute(sql)
-results = cursor.fetchall()
-for result in results:
-    print(result)
+# Query to get last 10 rows of zipcodes_one
+zipcodes_one_query = "SELECT * FROM zipcodes_one ORDER BY id DESC LIMIT 10"
 
-# Print first 10 rows of zipcodes_two
-print('The first 10 rows of zipcodes_two are:')
-sql = "SELECT * FROM zipcodes_two LIMIT 10"
-cursor.execute(sql)
-results = cursor.fetchall()
-for result in results:
-    print(result)
+# Query to get first 10 rows of zipcodes_two
+zipcodes_two_query = "SELECT * FROM zipcodes_two LIMIT 10"
 
-# Print largest zipcode number in zipcodes_one
-print('The largest zipcode number in zipcodes_one is:')
-sql = "SELECT Zipcode FROM zipcodes_one ORDER BY Zipcode DESC LIMIT 1"
-cursor.execute(sql)
-results = cursor.fetchall()
-for result in results:
-    print(result)
+# Query to get the largest zipcode in zipcodes_one
+zipcodes_one_max_query = "SELECT MAX(zipcode) FROM zipcodes_one"
 
-# Print smallest zipcode number in zipcodes_two
-print('The smallest zipcode number in zipcodes_two is:')
-sql = "SELECT Zipcode FROM zipcodes_two ORDER BY Zipcode ASC LIMIT 1"
-cursor.execute(sql)
-results = cursor.fetchall()
-for result in results:
-    print(result)
+# Query to get the smallest zipcode in zipcodes_two
+zipcodes_two_min_query = "SELECT MIN(zipcode) FROM zipcodes_two"
 
-# Close database connection
-conn.close()
+# Execute the queries
+cursor = db.cursor()
+cursor.execute(zipcodes_one_query)
+zipcodes_one_result = cursor.fetchall()
+
+cursor.execute(zipcodes_two_query)
+zipcodes_two_result = cursor.fetchall()
+
+cursor.execute(zipcodes_one_max_query)
+zipcodes_one_max_result = cursor.fetchone()[0]
+
+cursor.execute(zipcodes_two_min_query)
+zipcodes_two_min_result = cursor.fetchone()[0]
+
+# Print the results to console
+print("Last 10 rows of zipcodes_one:")
+for row in zipcodes_one_result:
+    print(row)
+
+print("\nFirst 10 rows of zipcodes_two:")
+for row in zipcodes_two_result:
+    print(row)
+
+print("\nLargest zipcode in zipcodes_one:", zipcodes_one_max_result)
+
+print("\nSmallest zipcode in zipcodes_two:", zipcodes_two_min_result)
+
+# Close the database connection
+db.close()
