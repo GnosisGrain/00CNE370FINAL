@@ -1,5 +1,6 @@
 ### Code written by Doc McDowell for CNE370 Winter Quarter, 2023, mcdowelldoc@gmail.com with assistance from the following resources:
-# https://mariadb.com/resources/blog/schema-sharding-with-mariadb-maxscale-2-1-part-1/
+# This app runs a command in Ubuntu environtments to shard SQL databases and merges data from command line
+#https://mariadb.com/resources/blog/schema-sharding-with-mariadb-maxscale-2-1-part-1/
 #https://k21academy.com/docker-kubernetes/docker-compose/
 #https://devhints.io/docker-compose
 
@@ -8,8 +9,8 @@ import mysql.connector
 # Connect to Maxscale instance
 db = mysql.connector.connect(
     host="127.0.0.1",
-    user="rootwork",
-    password="1cadwaer2",
+    user="maxusr",
+    password="maxpwd",
     database="zipcodes"
 )
 
