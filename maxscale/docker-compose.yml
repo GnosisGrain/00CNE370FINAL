@@ -1,35 +1,37 @@
-version: '2'
-    maxscale:
-        image: mariadb/maxscale:latest
-        depends_on:
-            - master
-            - slave1
-            - slave2
-        volumes:
-            - ./maxscale.cnf.d:/etc/maxscale.cnf.d
-        ports:
-            - "4006:4006"  # readwrite port
-            - "4008:4008"  # readonly port
-            - "8989:8989"  # REST API port
+version: '3.8'
+
 services:
-    master1:
-        image: mariadb:latest
-        environment:
-            MYSQL_ALLOW_EMPTY_PASSWORD: 'Y'
-        volumes:
-            - ./sql/master:/docker-entrypoint-initdb.d
-        command: mysqld --log-bin=mariadb-bin --binlog-format=ROW --server-id=3000
-        ports:
-            - "4001:3306"
-    master2:
-        image: mariadb:latest
-        environment:
-            MYSQL_ALLOW_EMPTY_PASSWORD: 'Y'
-        volumes:
-            - ./sql/master:/docker-entrypoint-initdb.d
-        command: mysqld --log-bin=mariadb-bin --binlog-format=ROW --server-id=3000
-        ports:
-            - "4001:3306"
+  maxscale:
+    image: mariadb/maxscale:latest
+    ports:
+      - "4006:4006"
+      - "6603:6603"
+    volumes:
+      - ./maxscale.cnf:/etc/maxscale.cnf
+    restart: always
+  
+  master1:
+    image: mariadb:latest
+    command: --server-id=1
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: example_db
+      MYSQL_USER: example_user
+      MYSQL_PASSWORD: example_pass
+    volumes:
+      - ./master1.cnf:/etc/mysql/conf.d/master.cnf
+      - ./data1:/var/lib/mysql
+    restart: always
 
-
-
+  master2:
+    image: mariadb:latest
+    command: --server-id=2
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: example_db
+      MYSQL_USER: example_user
+      MYSQL_PASSWORD: example_pass
+    volumes:
+      - ./master2.cnf:/etc/mysql/conf.d/master.cnf
+      - ./data2:/var/lib/mysql
+    restart: always
