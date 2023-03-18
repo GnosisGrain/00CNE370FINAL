@@ -17,7 +17,7 @@ To get started with this app, follow these steps:
 ```
     bash
 
- git clone https://github.com/yourusername/sharded-database.git
+ git clone https://github.com/GnosisGrain/00CNE370FINAL.git
 ```
 2. Navigate to the cloned repository:
 ```
