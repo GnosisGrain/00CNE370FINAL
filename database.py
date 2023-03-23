@@ -9,8 +9,8 @@ import mysql.connector
 # Connect to Maxscale instance
 db = mysql.connector.connect(
     host="127.0.0.1",
-    user="maxusr",
-    password="maxpwd",
+    user="root",
+    password="1cadwaer2",
     database="zipcodes"
 )
 
