@@ -39,5 +39,5 @@ type=monitor
 module=mariadbmon
 servers=zipcodes_one,zipcodes_two
 user=monitoruser
-password=7SP1Zcsow8TG+9EkEBVEbaKa
+password=
 monitor_interval=1000
