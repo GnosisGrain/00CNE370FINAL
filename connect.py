@@ -1,8 +1,8 @@
 import pymysql
 
-connection = pymysql.connect(host="192.168.50.228",
-                             user="rootwork",
-                             password="1cadwaer2",
+connection = pymysql.connect(host="127.0.0,1",
+                             user="root",
+                             password="1cadwaer2", 
                              database="zipcodes")
 
 try:
