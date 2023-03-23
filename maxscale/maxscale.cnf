@@ -26,9 +26,8 @@ port=3306
 type=service
 router=schemarouter
 servers=zipcodes_one,zipcodes_two
-user=rootwork
-password=YqztlYGDvZ8tVMe3GUm9XCwQi
-
+user=root
+password=
 [Sharded-Service-Listener]
 type=listener
 service=Sharded-Service
@@ -38,7 +37,7 @@ port=4000
 [MySQL-Monitor]
 type=monitor
 module=mariadbmon
-servers=zipcodes_one,zipcodes)two
+servers=zipcodes_one,zipcodes_two
 user=monitoruser
 password=7SP1Zcsow8TG+9EkEBVEbaKa
 monitor_interval=1000
